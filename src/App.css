@@ -12,6 +12,6 @@
   background-color: rgb(106, 106, 106);
   border-radius: 6px;
 }
-input::selection{
-  
+sup{
+  z-index: 0;
 }
