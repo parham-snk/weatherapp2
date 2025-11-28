@@ -1,10 +1,63 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import HourlyItem from "./hourlyItem"
 import dropDownIcon from "../../../assets/icon-dropdown.svg"
 import Day from "./day"
+import GetDay from "./GetDay"
 const HourlyForcast = props => {
-    const [day, setDay] = useState("saturday")
+    const [info, setinfo] = useState(props.data || [])
+    const [day, setDay] = useState()
     const [showDayList, setShowDayList] = useState(false)
+    const [wdays, setWdays] = useState()
+    const [houres, setHoures] = useState()
+    const [counter, setCounter] = useState(0)
+
+    let items = props.data.temperature_2m.slice(((counter * 23) + 1), (((counter + 1) * 23) + 1)).map((item, index) => {
+        return <HourlyItem w={info.weather_code} h={index + 1} temp={item} key={index} />
+    })
+
+    function getWeek() {
+        let w = []
+        let [y, m, d] = props.data.time[0].split("T")[0].split("-").map(Number)
+
+        let date = new Date(y, m - 1, d)
+
+        for (let i = 0; i < 7; i++) {
+            w.push(date.getDay())
+            date.setDate(date.getDate() + 1)
+        }
+
+        w = w.map(d => {
+            switch (d) {
+                case 6:
+                    return "satureday"
+                case 0:
+                    return "sunday"
+                case 1:
+                    return "monday"
+                case 2:
+                    return "tuesday"
+                case 3:
+                    return "wendsday"
+                case 4:
+                    return "thursday"
+                case 5:
+                    return "friday"
+            }
+        })
+        setDay(w[0])
+        setWdays(w)
+    }
+
+    useEffect(() => {
+        getWeek()
+
+        let items = props.data.temperature_2m.slice(((counter * 23) + 1), (((counter + 1) * 23) + 1)).map((item, index) => <HourlyItem w={info.weather_code} h={index + 1} temp={item} key={index} />)
+        setHoures(items)
+    }, [props])
+    useEffect(() => {
+        let items = props.data.temperature_2m.slice(((counter * 23) + 1), (((counter + 1) * 23) + 1)).map((item, index) => <HourlyItem w={info.weather_code} h={index + 1} temp={item} key={index} />)
+        setHoures(items)
+    }, [counter])
     return (
         <div style={{ zIndex: 97 }} className="
                 flex flex-col justify-start items-start
@@ -23,28 +76,19 @@ const HourlyForcast = props => {
                     </div>
                     {
                         showDayList &&
-                        <div className="absolute w-250 h-auto rounded right-0 flex flex-col bg-primary p-3 shadow-sm border-2 border-hover mt-4 shadow-black">
-                            <Day day="Saturday" setday={() => {
-                                setDay("Saturday")
-                            }} />
-                            <Day day="Sunday" setday={() => {
-                                setDay("Sunday")
-                            }} />
-                            <Day day="Monday" setday={() => {
-                                setDay("Monday")
-                            }} />
-                            <Day day="Tuesday" setday={() => {
-                                setDay("Tuesday")
-                            }} />
-                            <Day day="Wendsday" setday={() => {
-                                setDay("Wendsday")
-                            }} />
-                        </div>
+
+                        <GetDay data={wdays} setday={(val, counter) => {
+                            setDay(val)
+                            setCounter(counter)
+                        }} />
                     }
                 </div>
             </div>
             <div className="flex flex-col justify-start items-start w-full  overflow-hidden overflow-y-scroll px-2 py-3">
-                <HourlyItem w="cloud" h="3" temp="68" />
+                {
+                    houres &&
+                    houres
+                }
             </div>
         </div>
     )

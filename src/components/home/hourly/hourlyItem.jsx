@@ -16,7 +16,7 @@ const HourlyItem = props => {
             </div>
             {
                 props.temp &&
-                <p className="text-2xl">68 °</p>
+                <p className="text-2xl">{props.temp} °</p>
             }
         </div>
     )
