@@ -22,6 +22,7 @@ module.exports = {
         hover:"#2F2F49"
       },
       width: {
+
         custom: '1440px',
         '1/7': "14.2857%",
         100:"100px",
@@ -31,6 +32,7 @@ module.exports = {
       },
       height: {
         minscreen: "calc(100vh/2)",
+        "200": "200px",
         "300": "300px",
         600: "600px",
         700: "700px",
@@ -43,6 +45,11 @@ module.exports = {
         custome: "1440px"
       },minHeight:{
         200:"200px"
+      },
+      fontSize:{
+        30:"30px",
+        45:"45px",
+        90:"90px",
       }
     },
   },

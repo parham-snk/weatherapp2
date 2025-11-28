@@ -10,10 +10,10 @@ const TempType = props => {
     const [windType, setWindType] = useState("km/h")
     const [showOPtions, setShowOptions] = useState(false)
     return (
-        <div className="relative w-30 h-auto px-2 py-1  text-white bg-gray-600 bg-opacity-50 backdrop-blur-sm rounded flex flex-row justify-around align-middle items-center user-select-none cursor-pointer">
+        <div className="relative w-30 h-auto px-2 py-1  text-white bg-gray-600 bg-opacity-50 backdrop-blur-sm rounded flex flex-row justify-around align-middle items-center user-select-none ">
             <div onClick={() => {
                 setShowOptions(!showOPtions)
-            }} className="flex flex-row ">
+            }} className="flex flex-row cursor-pointer ">
                 <img width={15} src={gear} />
                 <p className="mx-5">units</p>
                 <img width={15} src={dropdownIcon} alt="" />

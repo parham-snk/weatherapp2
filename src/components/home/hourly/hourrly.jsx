@@ -3,12 +3,12 @@ import HourlyItem from "./hourlyItem"
 import dropDownIcon from "../../../assets/icon-dropdown.svg"
 import Day from "./day"
 const HourlyForcast = props => {
-    const [day, setDay] = useState()
+    const [day, setDay] = useState("saturday")
     const [showDayList, setShowDayList] = useState(false)
     return (
         <div style={{ zIndex: 97 }} className="
                 flex flex-col justify-start items-start
-                w-1/4 min-h-1/2  h-screen bg-primary rounded-xl shadow 
+                w-full scale-95 md:scale-100 xl:w-1/4 min-h-1/2  h-screen bg-primary rounded-xl shadow 
                 p-3
                 "
         >
@@ -18,17 +18,27 @@ const HourlyForcast = props => {
                     setShowDayList(!showDayList)
                 }} className="relative w-auto h-auto bg-gray-700 p-2 rounded-md bg-opacity-60">
                     <div className="flex flex-row justify-center align-middle items-center cursor-pointer">
-                        <p clas>Tuesday</p>
+                        <p clas>{day}</p>
                         <img className="mx-2" src={dropDownIcon} alt="" />
                     </div>
                     {
                         showDayList &&
-                        <div className="absolute w-250 h-auto rounded right-0 flex flex-col bg-primary p-3 shadow-xl border-2 border-hover mt-4">
-                            <Day day="Saturday" />
-                            <Day day="Sunday" />
-                            <Day day="Monday" />
-                            <Day day="Tuesday" />
-                            <Day day="Wendsday" />
+                        <div className="absolute w-250 h-auto rounded right-0 flex flex-col bg-primary p-3 shadow-sm border-2 border-hover mt-4 shadow-black">
+                            <Day day="Saturday" setday={() => {
+                                setDay("Saturday")
+                            }} />
+                            <Day day="Sunday" setday={() => {
+                                setDay("Sunday")
+                            }} />
+                            <Day day="Monday" setday={() => {
+                                setDay("Monday")
+                            }} />
+                            <Day day="Tuesday" setday={() => {
+                                setDay("Tuesday")
+                            }} />
+                            <Day day="Wendsday" setday={() => {
+                                setDay("Wendsday")
+                            }} />
                         </div>
                     }
                 </div>

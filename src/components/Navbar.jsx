@@ -3,7 +3,7 @@ import logo from "../assets/logo.svg"
 import TempType from "./setTempType"
 const Navbar = props => {
     return (
-        <nav style={{zIndex:99}} className="fixed max-w-custome my-10 t-20  h-30  w-full bg-black backdrop-blur bg-opacity-10 rounded">
+        <nav style={{zIndex:99}} className="md:fixed relative max-w-custome my-10 md:t-20  h-30 top-0  w-full md:bg-black md:backdrop-blur md:bg-opacity-10 md:rounded">
             <ul className="flex flex-row w-full  justify-between my-3 px-4">
                 <NavLink to={"/w"}>
                     <img src={logo} />
