@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import checkIcon from "../../assets/icon-checkmark.svg"
+
 const CheckItem = props => {
     const { name, value, desc } = props
     const check = props.checked
@@ -15,7 +15,7 @@ const CheckItem = props => {
         <div className="flex justify-center align-middle items-center">
             {
                 check &&
-                <img src={checkIcon} alt="" />
+                <img src="/assets/icon-checkmark.svg" alt="" />
             }
         </div>
     </div>

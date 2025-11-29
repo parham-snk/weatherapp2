@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import searchIcon from "../../assets/icon-search.svg"
+
 import CityItem from "./cityItem"
 import { UnitContext } from "../../context/context"
 const Searchbar = props => {
@@ -41,7 +41,6 @@ const Searchbar = props => {
                 .then(data => data.json()).then(data => {
                     props.setinfo(data)
                     console.log(data)
-                    console.log(api)
                 })
                 .catch(() => {
 
@@ -64,7 +63,7 @@ const Searchbar = props => {
             <div className="flex flex-col md:flex-row justify-center align-middle w-full my-16">
                 <div className="relative flex flex-row justify-start align-middle bg-primary rounded-xl w-full">
                     <label htmlFor="search" className="flex justify-center align-middle cursor-pointer">
-                        <img className="mx-4 w-5" src={searchIcon} alt="" />
+                        <img className="mx-4 w-5" src="/assets/icon-search.svg" alt="" />
                     </label>
                     <input id="search" value={input} type="text" onBlur={() => {
                         // setshowlist(false)

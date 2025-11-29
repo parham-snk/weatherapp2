@@ -1,9 +1,6 @@
-import { IoIosArrowDown } from "react-icons/io";
-import gear from "../assets/gear.svg"
-import dropdownIcon from "../assets/icon-dropdown.svg"
-import checkmark from "../assets/icon-checkmark.svg"
+
 import CheckItem from "./home/checkitem";
-import checkIcon from "../assets/icon-checkmark.svg"
+
 import { useContext, useEffect, useState } from "react";
 import { UnitContext } from "../context/context";
 const TempType = props => {
@@ -16,9 +13,9 @@ const TempType = props => {
             <div onClick={() => {
                 setShowOptions(!showOPtions)
             }} className="flex flex-row cursor-pointer ">
-                <img width={15} src={gear} />
+                <img width={15} src="/assets/gear.svg" />
                 <p className="mx-5">units</p>
-                <img width={15} src={dropdownIcon} alt="" />
+                <img width={15} src="/assets/icon-dropdown.svg" alt="" />
             </div>
             {
                 showOPtions &&
