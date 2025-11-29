@@ -80,7 +80,7 @@ const HourlyForcast = props => {
                     {
                         showDayList &&
 
-                        <GetDay data={wdays} setday={(val, c) => {
+                        <GetDay day={day} data={wdays} setday={(val, c) => {
                             setDay(val)
                             setCounter(c)
                         }} />

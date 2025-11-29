@@ -52,7 +52,7 @@ const Searchbar = props => {
 
     }, [city])
     useEffect(() => {
-        if(city){
+        if (city) {
             refresh(city)
         }
 
@@ -102,7 +102,22 @@ const Searchbar = props => {
                         </div>
                     }
                 </div>
-                <button className="bg-indigo-700 rounded text-white px-4 py-3 md:mx-2 my-4 md:my-0">search</button>
+                <button className="bg-indigo-700 rounded text-white px-4 py-3 md:mx-2 my-4 md:my-0" onClick={(e) => {
+
+
+                    fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${e.target.value}&count=10&language=en&format=json`).then(data => data.json()).then(data => {
+                        if (data.results instanceof Array) {
+                            setcities(data.results)
+
+                        } else {
+                            setcities([])
+                        }
+
+                    }).catch(() => {
+                        setcities([])
+                    })
+
+                }}>search</button>
             </div>
         </div>
     )
