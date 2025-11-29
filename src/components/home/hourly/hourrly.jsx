@@ -11,9 +11,6 @@ const HourlyForcast = props => {
     const [houres, setHoures] = useState()
     const [counter, setCounter] = useState(0)
 
-    let items = props.data.temperature_2m.slice(((counter * 23) + 1), (((counter + 1) * 23) + 1)).map((item, index) => {
-        return <HourlyItem w={info.weather_code} h={index + 1} temp={item} key={index} />
-    })
 
     function getWeek() {
         let w = []
@@ -49,17 +46,19 @@ const HourlyForcast = props => {
     }
 
     useEffect(() => {
+        console.log(counter)
         getWeek()
-
-        let items = props.data.temperature_2m.slice(((counter * 23) + 1), (((counter + 1) * 23) + 1)).map((item, index) => <HourlyItem w={info.weather_code} h={index + 1} temp={item} key={index} />)
+        let items = props.data.temperature_2m.slice(((counter * 23) + 1), (((counter + 1) * 23) + 1)).map((item, index) => <HourlyItem w={props.data.weather_code[((counter * 23) + index)]} h={index + 1} temp={item} key={index} />)
         setHoures(items)
-    }, [props])
+    }, [props.data])
     useEffect(() => {
-        let items = props.data.temperature_2m.slice(((counter * 23) + 1), (((counter + 1) * 23) + 1)).map((item, index) => <HourlyItem w={info.weather_code} h={index + 1} temp={item} key={index} />)
+        getWeek()
+        console.log(counter)
+        let items = props.data.temperature_2m.slice(((counter * 23) + 1), (((counter + 1) * 23) + 1)).map((item, index) => <HourlyItem w={props.data.weather_code[(counter * 23) + index]} h={index + 1} temp={item} key={index} />)
         setHoures(items)
     }, [counter])
 
-    
+
     return (
         <div style={{ zIndex: 97 }} className="
                 flex flex-col justify-start items-start
@@ -79,9 +78,9 @@ const HourlyForcast = props => {
                     {
                         showDayList &&
 
-                        <GetDay data={wdays} setday={(val, counter) => {
+                        <GetDay data={wdays} setday={(val, c) => {
                             setDay(val)
-                            setCounter(counter)
+                            setCounter(c)
                         }} />
                     }
                 </div>

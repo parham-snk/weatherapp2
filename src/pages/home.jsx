@@ -4,6 +4,8 @@ import HourlyForcast from "../components/home/hourly/hourrly"
 import Searchbar from "../components/home/searchbar"
 import { useContext, useEffect, useState } from "react"
 import { UnitContext } from "../context/context"
+import Daily from "../components/home/daily/daily"
+import checkweather_code from "../components/checkWeather"
 
 const HomePage = props => {
 
@@ -23,18 +25,13 @@ const HomePage = props => {
             setHourly(false)
             setCurrent(info.current)
             setDaily(info.daily)
-            setHourly({ ...info.hourly })
-
+            setHourly(info.hourly)
         } else {
 
         }
-
+        console.log(daily)
     }, [info])
 
-    useEffect(() => {
-        console.log("h")
-        console.log(hourly)
-    }, [hourly])
 
 
 
@@ -83,7 +80,7 @@ const HomePage = props => {
                                             {/* <p className="text-shadow-md text-xl py-5 font-light">Tuesday, Aug 5,2025</p> */}
                                         </div>
                                         <div className="w-1/2 h-full flex flex-row justify-center align-middle items-center">
-                                            <img style={{ width: "120px" }} src="/assets/icon-rain.webp" alt="" />
+                                            <img style={{ width: "120px" }} src={checkweather_code(current?.weather_code)} alt="" />
                                             <p className="text-45 sm:text-90 py-2 pl-10 text-shadow-md">{current?.temperature_2m}<sup>°</sup>{fahrenheit ? "F" : "C"}</p>
 
                                         </div>
@@ -127,20 +124,7 @@ const HomePage = props => {
                             <div className="w-full h-auto text-start text-2xl ">
                                 Daily forecast
                             </div>
-                            <div className="flex flex-row flex-wrap md:flex-nowrap md:flex-row  md:justify-start items-center align-middle  w-full h-fit py-10 box-content ">
-                                <div className="rounded-2xl shdaow shadow-black shadow-sm bg-primary
-                        text-white flex flex-col justify-around  items-center px-4 w-1/3 md:w-1/7 h-64 md:mx-2 scale-95 md:scale-100
-                        text-center
-                        " >
-                                    <p>Tue</p>
-                                    <img width={120} src="/assets/icon-rain.webp" alt="" />
-                                    <div className="flex flex-row scale-95 md:scale-100 justify-between align-middle text-2xl w-full">
-                                        <p className="text-gray-50 text-opacity-80">57 <sup>°</sup></p>
-                                        <p>68 <sup>°</sup></p>
-                                    </div>
-                                </div>
-
-                            </div>
+                            <Daily data={info.daily} />
                         </div>
                     </div>
 

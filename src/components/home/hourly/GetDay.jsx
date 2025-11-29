@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import Day from "./day"
 import HourlyItem from "./hourlyItem"
 const GetDay = props => {
-    const [info, setInfo] = useState(props.data || [])
-    const [counter, setCounter] = useState(0)
+
+
 
     const days = props.data.map((item, index) => {
         return <Day day={item} key={index} setday={() => {
