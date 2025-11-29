@@ -6,8 +6,9 @@ const GetDay = props => {
 
 
     const days = props.data.map((item, index) => {
+        console.log(item)
         return <Day day={item} key={index} setday={() => {
-            props.setday(item,index)
+            props.setday(item, index)
         }} />
     })
 

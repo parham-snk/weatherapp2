@@ -41,7 +41,9 @@ const HourlyForcast = props => {
                     return "friday"
             }
         })
-        setDay(w[0])
+        if (!day) {
+            setDay(w[0])
+        }
         setWdays(w)
     }
 
