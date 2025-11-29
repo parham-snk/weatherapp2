@@ -58,6 +58,8 @@ const HourlyForcast = props => {
         let items = props.data.temperature_2m.slice(((counter * 23) + 1), (((counter + 1) * 23) + 1)).map((item, index) => <HourlyItem w={info.weather_code} h={index + 1} temp={item} key={index} />)
         setHoures(items)
     }, [counter])
+
+    
     return (
         <div style={{ zIndex: 97 }} className="
                 flex flex-col justify-start items-start

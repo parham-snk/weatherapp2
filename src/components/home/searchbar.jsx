@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import searchIcon from "../../assets/icon-search.svg"
 import CityItem from "./cityItem"
+import { UnitContext } from "../../context/context"
 const Searchbar = props => {
+    const { fahrenheit, setFahrenheit, windSpeedKM, setWindSpeedKM } = useContext(UnitContext)
     const [showlist, setshowlist] = useState(false)
     const [cities, setcities] = useState([])
     const [city, setCity] = useState(false)
     const [citiesElements, setcitiesElements] = useState()
     const [input, setinput] = useState()
-    const [farenheit, setfarenheit] = useState(false)
-    const [tempUnit, setTempUnit] = useState("")
+
     useEffect(() => {
         if (cities.length > 0) {
             let cts = cities.map((item, index) => {
@@ -25,16 +26,13 @@ const Searchbar = props => {
             setcitiesElements(cts)
         }
     }, [cities])
-
-    useEffect(() => {
+    const refresh = (city) => {
         if (city) {
             const { latitude, longitude } = city
             let api;
-            if (farenheit) {
-                api = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,apparent_temperature,weather_code,relative_humidity_2m,wind_speed_10m,precipitation&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation_probability,weather_code,rain,snowfall&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=auto&temperature_unit=fahrenheit`
-            } else {
-                api = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,apparent_temperature,weather_code,relative_humidity_2m,wind_speed_10m,precipitation&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation_probability,weather_code,rain,snowfall&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=auto`
-            }
+
+            api = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,apparent_temperature,weather_code,relative_humidity_2m,wind_speed_10m,precipitation&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation_probability,weather_code,rain,snowfall&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=auto${windSpeedKM ? "" : "&wind_speed_unit=mph"}${fahrenheit ? "&temperature_unit=fahrenheit" : ""}`
+
 
 
             //forenheit unit
@@ -43,13 +41,23 @@ const Searchbar = props => {
                 .then(data => data.json()).then(data => {
                     props.setinfo(data)
                     console.log(data)
+                    console.log(api)
                 })
                 .catch(() => {
 
                 })
         }
+    }
+    useEffect(() => {
+        refresh(city)
 
     }, [city])
+    useEffect(() => {
+        if(city){
+            refresh(city)
+        }
+
+    }, [city, fahrenheit, windSpeedKM])
     return (
         <div className="flex flex-col justify-center items-center w-full md:w-1/2">
             <h1 className="first-letter:uppercase text-6xl h-auto text-wrap w-3/4 text-center  md:text-4xl">how's the sky looking today?</h1>

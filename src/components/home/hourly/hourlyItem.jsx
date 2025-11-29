@@ -1,4 +1,4 @@
-import cloudeIcone from "../../../assets/icon-rain.webp"
+
 const HourlyItem = props => {
 
     return (
@@ -6,7 +6,7 @@ const HourlyItem = props => {
             <div className="flex flex-row justify-center align-middle items-center h-full">
                 {
                     props.w &&
-                    <img className="w-14 pr-4" src={cloudeIcone} alt="" />
+                    <img className="w-14 pr-4" src="/assets/icon-rain.webp" alt="" />
 
                 }
                 {

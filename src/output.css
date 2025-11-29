@@ -919,6 +919,10 @@ video {
   line-height: 2.25rem;
 }
 
+.text-45 {
+  font-size: 45px;
+}
+
 .text-5xl {
   font-size: 3rem;
   line-height: 1;
@@ -927,10 +931,6 @@ video {
 .text-6xl {
   font-size: 3.75rem;
   line-height: 1;
-}
-
-.text-90 {
-  font-size: 90px;
 }
 
 .text-sm {
@@ -1038,10 +1038,6 @@ video {
   background-color: rgb(47 47 73 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-opacity-50:hover {
-  --tw-bg-opacity: 0.5;
-}
-
 .hover\:bg-opacity-40:hover {
   --tw-bg-opacity: 0.4;
 }
@@ -1050,6 +1046,12 @@ video {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+@media (min-width: 640px) {
+  .sm\:text-90 {
+    font-size: 90px;
+  }
 }
 
 @media (min-width: 768px) {
