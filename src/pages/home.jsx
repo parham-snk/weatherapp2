@@ -6,11 +6,12 @@ import { useContext, useEffect, useState } from "react"
 import { UnitContext } from "../context/context"
 import Daily from "../components/home/daily/daily"
 import checkweather_code from "../components/checkWeather"
+import { useLocation, useNavigate } from "react-router"
 
 const HomePage = props => {
 
     const { fahrenheit, setFahrenheit, windSpeedKM, setWindSpeedKM } = useContext(UnitContext)
-
+    const location = useNavigate()
 
     const [info, setInfo] = useState()
     const [city, setcity] = useState(false)
@@ -26,10 +27,16 @@ const HomePage = props => {
             setCurrent(info.current)
             setDaily(info.daily)
             setHourly(info.hourly)
+
+
+
+            window.scrollTo(0,230)
+
         } else {
 
         }
-        console.log(daily)
+
+
     }, [info])
 
 
@@ -68,7 +75,7 @@ const HomePage = props => {
                 <div className="flex flex-col xl:flex-row justify-center align-middle w-full h-full md:px-10 fade">
                     <div className="flex flex-col justify-center items-center align-middle w-full xl:w-3/4 h-full md:px-4">
 
-                        <div className="flex flex-col xl:flex-row justify-center align-middle items-center w-full h-full">
+                        <div className="flex flex-col xl:flex-row justify-center align-middle items-center w-full h-full" id="d">
                             <div className="flex flex-col w-full h-full">
                                 <div className="relative w-full">
                                     <img src="/assets/bg-today-small.svg" className="block md:hidden w-full" alt="" />

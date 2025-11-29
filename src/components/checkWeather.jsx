@@ -1,6 +1,6 @@
 function checkweather_code(weather_code) {
     if (weather_code == 61 || weather_code == 63 || weather_code == 65) {
-        return "/assets/icon-rain.weather_codeebp"
+        return "/assets/icon-rain.webp"
     }
     else if (weather_code == 51 || weather_code == 53 || weather_code == 55) {
         return "/assets/icon-drizzle.webp"

@@ -35,7 +35,7 @@ const DailyItem = props => {
 
         <p>{day}</p>
         <img width={120} src={checkweather(weather_code)} alt="" />
-        <div className="flex flex-row scale-95 md:scale-100 justify-between align-middle text-2xl w-full">
+        <div className="flex flex-row scale-95 md:scale-100 justify-between align-middle sm:text-2xl w-full">
             <p className="text-gray-50 text-opacity-80">{temperature_2m_min} <sup>°</sup></p>
             <p>{temperature_2m_max} <sup>°</sup></p>
         </div>

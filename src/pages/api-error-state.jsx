@@ -1,6 +1,6 @@
 
 const ApiErrorPage = props => {
-    return <div className="flex w-3/4 md:w-100 h-fit flex-col justify-top align-top text-center items-center text-white pt-100">
+    return <div className="flex md:w-3/4 w-100 h-fit flex-col justify-top align-top text-center items-center text-white pt-100">
         <img width={40} className="my-10" src={"/assets/icon-error.svg"} alt="" />
         <h1 className="font-bold text-5xl">Something went wrong</h1>
         <p className="text-gray-300 pt-10 w-full text-wrap md:w-3/5">we couldn't connect to the server (API error). please try agaign in a few momments.</p>
