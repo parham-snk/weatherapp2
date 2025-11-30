@@ -10,6 +10,44 @@ const Searchbar = props => {
     const [citiesElements, setcitiesElements] = useState()
     const [input, setinput] = useState()
 
+    const refresh = (city) => {
+        if (city) {
+            const { latitude, longitude } = city
+            let api;
+            api = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,apparent_temperature,weather_code,relative_humidity_2m,wind_speed_10m,precipitation&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation_probability,weather_code,rain,snowfall&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=auto${windSpeedKM ? "" : "&wind_speed_unit=mph"}${fahrenheit ? "&temperature_unit=fahrenheit" : ""}`
+            fetch(api)
+                .then(data => data.json()).then(data => {
+                    props.setinfo(data)
+                })
+                .catch(() => {
+
+                })
+        }
+    }
+    async function searchCity() {
+        setshowlist(true)
+
+        fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${input}&count=10&language=en&format=json`).then(data => data.json()).then(data => {
+            if (data.results instanceof Array) {
+                setcities(data.results)
+
+            } else {
+                setcities([])
+            }
+
+        }).catch(() => {
+            setcities([])
+        })
+    }
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(
+            async (pos) => {
+                const { latitude, longitude } = pos.coords
+                refresh({ latitude, longitude })
+            }, err => {
+                
+            })
+    }, [])
     useEffect(() => {
         if (cities.length > 0) {
             let cts = cities.map((item, index) => {
@@ -26,27 +64,7 @@ const Searchbar = props => {
             setcitiesElements(cts)
         }
     }, [cities])
-    const refresh = (city) => {
-        if (city) {
-            const { latitude, longitude } = city
-            let api;
 
-            api = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,apparent_temperature,weather_code,relative_humidity_2m,wind_speed_10m,precipitation&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation_probability,weather_code,rain,snowfall&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=auto${windSpeedKM ? "" : "&wind_speed_unit=mph"}${fahrenheit ? "&temperature_unit=fahrenheit" : ""}`
-
-
-
-            //forenheit unit
-            //
-            fetch(api)
-                .then(data => data.json()).then(data => {
-                    props.setinfo(data)
-                    console.log(data)
-                })
-                .catch(() => {
-
-                })
-        }
-    }
     useEffect(() => {
         refresh(city)
 
