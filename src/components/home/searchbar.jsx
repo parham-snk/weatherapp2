@@ -11,8 +11,17 @@ const Searchbar = props => {
     const [location, setLocation] = useState(false)
     const [citiesElements, setcitiesElements] = useState()
     const [input, setinput] = useState()
+    const [LSLocation, setLSLocation] = useState()
 
-
+    useEffect(()=>{
+        const deflocation = JSON.parse(localStorage.getItem("default-location"))
+        if(deflocation){
+            setLSLocation(deflocation)
+        }
+        console.log(deflocation,location)
+    },[
+        window.localStorage.getItem("default-location")
+    ])
     const setDefaultCity = () => {
         if (window.confirm(`set ${location.city} as default location?`)) {
             localStorage.setItem("default-location", JSON.stringify({ city: location.city, country: location.country, latitude: location.latitude, longitude: location.longitude }))
@@ -78,8 +87,11 @@ const Searchbar = props => {
                 })
         } else {
             const deflocation = JSON.parse(localStorage.getItem("default-location"))
-            const { latitude, longitude } = deflocation
-            setCoordinates({ latitude, longitude })
+            if (deflocation) {
+                const { latitude, longitude } = deflocation
+                setCoordinates({ latitude, longitude })
+            }
+
         }
 
     }, [GPS])
@@ -134,11 +146,11 @@ const Searchbar = props => {
                     }} className="bg-transparent pr-2 py-3 w-full  px-2  " placeholder="seearch for a place ..." />
 
                     {
-                        location&& JSON.parse(localStorage.getItem("default-location")).city!=input && location.city == input &&
+                        location && LSLocation?.city!=location?.city &&  location?.city == input &&
                         <div
                             onClick={(e) => {
                                 setDefaultCity()
-                                e.target.style.visibility="hidden"
+                                e.target.style.visibility = "hidden"
                             }}
                             id="s"
                             className={`absolute w-40 h-full text-green-600 right-0  border-green-600 border flex justify-center align-middle items-center scale-75 rounded-xl cursor-pointer`}>

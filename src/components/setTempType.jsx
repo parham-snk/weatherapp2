@@ -9,7 +9,7 @@ const TempType = props => {
     const [kmspeed, setkmspeed] = useState(windSpeedKM)
     const [showOPtions, setShowOptions] = useState(false)
     return (
-        <div className="relative w-30 h-auto px-2 py-1  text-white bg-gray-600 bg-opacity-50 backdrop-blur-sm rounded flex flex-row justify-around align-middle items-center user-select-none ">
+        <div className="relative w-30 h-auto px-2 py-1 min-w-fit scale-75 md:scale-100  text-white bg-gray-600 bg-opacity-50 backdrop-blur-sm rounded flex flex-row justify-around align-middle items-center user-select-none ">
             <div onClick={() => {
                 setShowOptions(!showOPtions)
             }} className="flex flex-row cursor-pointer ">

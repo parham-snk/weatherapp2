@@ -6,15 +6,21 @@ const UnitContext = createContext()
 const ContextProvider = props => {
     const [fahrenheit, setFahrenheit] = useState(false);
     const [windSpeedKM, setWindSpeedKM] = useState(true);
-    const [GPS, setGPS] = useState()
+    const [GPS, setGPS] = useState(true)
     const [loading, setLoading] = useState(false)
     useEffect(() => {
         const defLocationType = localStorage.getItem("gps")
         if (defLocationType == "true") {
             setGPS(true)
+        } else if (!defLocationType) {
+            localStorage.setItem("gps", true)
+            setGPS(true)
+
         } else {
             setGPS(false)
+
         }
+
 
     }, [])
     useEffect(() => {

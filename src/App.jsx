@@ -8,7 +8,7 @@ import { ContextProvider } from './context/context';
 
 function App() {
   return (
-    <div style={{ height: "100%", }} className="min-h-screen relative w-full z-1  bg-gradient-to-b from-bgfrom to-bgto flex flex-col align-middle items-center">
+    <div style={{ height: "100%", }} className="min-h-screen relative w-full z-1  bg-gradient-to-b from-bgfrom to-bgto flex flex-col align-middle items-center overflow-x-hidden">
       <BrowserRouter>
         <ContextProvider>
           <Navbar />
