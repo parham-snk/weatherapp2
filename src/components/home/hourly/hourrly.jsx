@@ -48,14 +48,12 @@ const HourlyForcast = props => {
     }
 
     useEffect(() => {
-        console.log(counter)
         getWeek()
         let items = props.data.temperature_2m.slice(((counter * 23) + 1), (((counter + 1) * 23) + 1)).map((item, index) => <HourlyItem w={props.data.weather_code[((counter * 23) + index)]} h={index + 1} temp={item} key={index} />)
         setHoures(items)
     }, [props.data])
     useEffect(() => {
         getWeek()
-        console.log(counter)
         let items = props.data.temperature_2m.slice(((counter * 23) + 1), (((counter + 1) * 23) + 1)).map((item, index) => <HourlyItem w={props.data.weather_code[(counter * 23) + index]} h={index + 1} temp={item} key={index} />)
         setHoures(items)
     }, [counter])

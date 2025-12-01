@@ -6,25 +6,49 @@ const Searchbar = props => {
     const { fahrenheit, setFahrenheit, windSpeedKM, setWindSpeedKM } = useContext(UnitContext)
     const [showlist, setshowlist] = useState(false)
     const [cities, setcities] = useState([])
+    //coordinates : {latitude,longitude}
+    const [coordinates, setCoordinates] = useState()
     const [city, setCity] = useState(false)
     const [citiesElements, setcitiesElements] = useState()
     const [input, setinput] = useState()
 
-    const refresh = (city) => {
-        if (city) {
-            const { latitude, longitude } = city
+
+    const setDefaultCity = () => {
+        if (window.confirm(`set ${city.city} as default location?`)) {
+            localStorage.setItem("default-location", JSON.stringify({ city: city.city, country: city.country, lalitude: city.lalitude, longitude: city.longitude }))
+        }
+    }
+    //this function uesd in searchCity function!
+    const getCityName = async (latitude, longitude) => {
+        let x = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`).then(data => data.json())
+        console.log(x)
+        const { city, countryName } = x
+        const [country] = [countryName.split(" ")[0]]
+
+        return { city, country }
+    }
+    const searchCity = async (city) => {
+        if (coordinates) {
+            const { latitude, longitude } = coordinates
             let api;
             api = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,apparent_temperature,weather_code,relative_humidity_2m,wind_speed_10m,precipitation&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation_probability,weather_code,rain,snowfall&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=auto${windSpeedKM ? "" : "&wind_speed_unit=mph"}${fahrenheit ? "&temperature_unit=fahrenheit" : ""}`
             fetch(api)
-                .then(data => data.json()).then(data => {
-                    props.setinfo(data)
+                .then(data => data.json()).then(async data => {
+
+                    getCityName(latitude, longitude).then(async ({ city, country }) => {
+
+                        setCity({ ...data, city, country })
+
+                        props.setinfo({ ...data, city, country })
+                    })
+
                 })
                 .catch(() => {
 
                 })
         }
     }
-    async function searchCity() {
+    async function searchCities() {
         setshowlist(true)
 
         fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${input}&count=10&language=en&format=json`).then(data => data.json()).then(data => {
@@ -39,42 +63,46 @@ const Searchbar = props => {
             setcities([])
         })
     }
+    //auto-detect-locaion
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(
             async (pos) => {
                 const { latitude, longitude } = pos.coords
-                refresh({ latitude, longitude })
+                setCoordinates({ latitude, longitude })
             }, err => {
-                
+
             })
     }, [])
+    //regresh cities list for search and select
     useEffect(() => {
         if (cities.length > 0) {
+
             let cts = cities.map((item, index) => {
                 let name = item.name
                 return <CityItem city={name} key={index} country={item.country} setcity={() => {
                     setcities([])
                     setshowlist(false)
-                    setCity(item)
+                    setCoordinates({ latitude: item.latitude, longitude: item.longitude })
                     setinput(name)
-                    props.setcity(item)
+                    // props.setcity(item)
 
                 }} />
             })
             setcitiesElements(cts)
         }
     }, [cities])
-
-    useEffect(() => {
-        refresh(city)
-
-    }, [city])
+    //refresh detail with any unit change!
     useEffect(() => {
         if (city) {
-            refresh(city)
+            searchCity(city)
         }
+    }, [fahrenheit, windSpeedKM])
 
-    }, [city, fahrenheit, windSpeedKM])
+    useEffect(() => {
+        if (coordinates) {
+            searchCity()
+        }
+    }, [coordinates])
     return (
         <div className="flex flex-col justify-center items-center w-full md:w-1/2">
             <h1 className="first-letter:uppercase text-6xl h-auto text-wrap w-3/4 text-center  md:text-4xl">how's the sky looking today?</h1>
@@ -88,26 +116,10 @@ const Searchbar = props => {
                     }} onChange={(e) => {
                         setinput(e.target.value)
                         if (e.target.value.length > 1) {
-                            setshowlist(true)
-
-                            fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${e.target.value}&count=10&language=en&format=json`).then(data => data.json()).then(data => {
-                                if (data.results instanceof Array) {
-                                    setcities(data.results)
-
-                                } else {
-                                    setcities([])
-                                }
-
-                            }).catch(() => {
-                                setcities([])
-                            })
+                            searchCities()
                         } else {
                             setcities([])
                         }
-
-
-
-
                     }} className="bg-transparent pr-2 py-3 w-full  px-2  " placeholder="seearch for a place ..." />
 
                     {

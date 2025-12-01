@@ -11,10 +11,10 @@ import { useLocation, useNavigate } from "react-router"
 const HomePage = props => {
 
     const { fahrenheit, setFahrenheit, windSpeedKM, setWindSpeedKM } = useContext(UnitContext)
-    const location = useNavigate()
+
 
     const [info, setInfo] = useState()
-    const [city, setcity] = useState(false)
+
 
 
     const [current, setCurrent] = useState()
@@ -23,6 +23,7 @@ const HomePage = props => {
 
     useEffect(() => {
         if (info) {
+            console.log(info)
             setHourly(false)
             setCurrent(info.current)
             setDaily(info.daily)
@@ -30,7 +31,7 @@ const HomePage = props => {
 
 
 
-            window.scrollTo(0,230)
+            window.scrollTo(0, 230)
 
         } else {
 
@@ -56,18 +57,9 @@ const HomePage = props => {
     return (
         <div className="text-white w-full h-full px-2 md:px-4 z-0 flex flex-col justify-center items-center " >
             <Searchbar
-                changeTempUnit={(value) => {
-                    setFahrenheit(value)
-                }}
-                changeWindUnit={value => {
-                    setWindSpeedKM(value)
-                }}
-                setcity={value => {
-                    setcity(value)
-                }}
-
                 setinfo={value => {
                     setInfo(value)
+
                 }}
             />
             {
@@ -82,7 +74,7 @@ const HomePage = props => {
                                     <img src="/assets/bg-today-large.svg" className="hidden md:block w-full" alt="" />
                                     <div className="absolute w-full h-full flex flex-col justify-center items-center md:flex-row md:justify-between md:align-middle top-0 left-0">
                                         <div className="flex flex-col justify-center itemce md:items-start md:pl-10 md:w-2/4 pt-10 md:pt-0">
-                                            <p className="text-shadow-md text-2xl md:text-4xl font-bold text-nowrap">{city && `${city.name}, ${city.country}`}</p>
+                                            <p className="text-shadow-md text-2xl md:text-4xl font-bold text-nowrap">{info && `${info.city}, ${info.country}`}</p>
                                             <p className="text-shadow-md text-xl py-5 font-light">{formatted}</p>
                                             {/* <p className="text-shadow-md text-xl py-5 font-light">Tuesday, Aug 5,2025</p> */}
                                         </div>
