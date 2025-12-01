@@ -7,10 +7,11 @@ import { UnitContext } from "../context/context"
 import Daily from "../components/home/daily/daily"
 import checkweather_code from "../components/checkWeather"
 import { useLocation, useNavigate } from "react-router"
+import Loading from "../components/loading"
 
 const HomePage = props => {
 
-    const { fahrenheit, setFahrenheit, windSpeedKM, setWindSpeedKM } = useContext(UnitContext)
+    const { fahrenheit, setFahrenheit, windSpeedKM, setWindSpeedKM,loading } = useContext(UnitContext)
 
 
     const [info, setInfo] = useState()
@@ -23,7 +24,6 @@ const HomePage = props => {
 
     useEffect(() => {
         if (info) {
-            console.log(info)
             setHourly(false)
             setCurrent(info.current)
             setDaily(info.daily)
@@ -63,7 +63,7 @@ const HomePage = props => {
                 }}
             />
             {
-                info &&
+                info && !loading &&
                 <div className="flex flex-col xl:flex-row justify-center align-middle w-full h-full md:px-10 fade">
                     <div className="flex flex-col justify-center items-center align-middle w-full xl:w-3/4 h-full md:px-4">
 
@@ -135,6 +135,10 @@ const HomePage = props => {
                     }
 
                 </div>
+            }
+            {
+                loading &&
+                <Loading/>
             }
 
 
