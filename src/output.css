@@ -643,6 +643,10 @@ video {
   max-height: 15rem;
 }
 
+.max-h-900 {
+  max-height: 900px;
+}
+
 .min-h-200 {
   min-height: 200px;
 }
@@ -665,6 +669,10 @@ video {
 
 .w-14 {
   width: 3.5rem;
+}
+
+.w-20 {
+  width: 5rem;
 }
 
 .w-200 {
@@ -970,13 +978,13 @@ video {
   line-height: 2rem;
 }
 
+.text-30 {
+  font-size: 30px;
+}
+
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
-}
-
-.text-45 {
-  font-size: 45px;
 }
 
 .text-5xl {
@@ -1153,6 +1161,10 @@ video {
     display: none;
   }
 
+  .md\:h-full {
+    height: 100%;
+  }
+
   .md\:w-1\/2 {
     width: 50%;
   }
@@ -1175,6 +1187,10 @@ video {
 
   .md\:w-3\/5 {
     width: 60%;
+  }
+
+  .md\:max-w-custome {
+    max-width: 1440px;
   }
 
   .md\:scale-100 {

@@ -12,7 +12,7 @@ function App() {
       <BrowserRouter>
         <ContextProvider>
           <Navbar />
-          <div className="flex justify-center align-top items-center pt-32 z-0 w-full md:full" style={{ zIndex: 0 }}>
+          <div className="flex justify-center align-top items-center pt-32 z-0 w-full md:full md:max-w-custome" style={{ zIndex: 0 }}>
             <Routes>
               <Route path='/' Component={HomePage} />
               <Route path='*' Component={ApiErrorPage} />

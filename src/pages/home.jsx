@@ -80,7 +80,7 @@ const HomePage = props => {
                                         </div>
                                         <div className="w-1/2 h-full flex flex-row justify-center align-middle items-center">
                                             <img style={{ width: "120px" }} src={checkweather_code(current?.weather_code)} alt="" />
-                                            <p className="text-45 sm:text-90 py-2 pl-10 text-shadow-md">{current?.temperature_2m}<sup>°</sup>{fahrenheit ? "F" : "C"}</p>
+                                            <p className="text-30 sm:text-90 py-2 pl-10 text-shadow-md">{current?.temperature_2m}<sup>°</sup>{fahrenheit ? "F" : "C"}</p>
 
                                         </div>
                                     </div>

@@ -13,13 +13,18 @@ const Searchbar = props => {
     const [input, setinput] = useState()
     const [LSLocation, setLSLocation] = useState()
 
-    useEffect(()=>{
+    const getDefLcocation = () => {
+
         const deflocation = JSON.parse(localStorage.getItem("default-location"))
-        if(deflocation){
+        return deflocation
+    }
+    useEffect(() => {
+        const deflocation = JSON.parse(localStorage.getItem("default-location"))
+        if (deflocation) {
             setLSLocation(deflocation)
         }
-        console.log(deflocation,location)
-    },[
+        console.log(deflocation, location)
+    }, [
         window.localStorage.getItem("default-location")
     ])
     const setDefaultCity = () => {
@@ -103,10 +108,17 @@ const Searchbar = props => {
             let cts = cities.map((item, index) => {
                 let name = item.name
                 return <CityItem city={name} key={index} country={item.country} setcity={() => {
-                    setcities([])
-                    setshowlist(false)
-                    setCoordinates({ latitude: item.latitude, longitude: item.longitude })
-                    setinput(name)
+
+                    if (location)
+                        setinput(name)
+                    if (name != getDefLcocation().city) {
+                        setcities([])
+                        setshowlist(false)
+                        setCoordinates({ latitude: item.latitude, longitude: item.longitude })
+                    }else{
+                        setshowlist(false)
+                    }
+
                     // props.setcity(item)
 
                 }} />
@@ -137,6 +149,7 @@ const Searchbar = props => {
                     <input id="search" value={input} type="text" onBlur={() => {
                         // setshowlist(false)
                     }} onChange={(e) => {
+
                         setinput(e.target.value)
                         if (e.target.value.length > 1) {
                             searchCities()
@@ -146,7 +159,7 @@ const Searchbar = props => {
                     }} className="bg-transparent pr-2 py-3 w-full  px-2  " placeholder="seearch for a place ..." />
 
                     {
-                        location && LSLocation?.city!=location?.city &&  location?.city == input &&
+                        location && LSLocation?.city != location?.city && location?.city == input &&
                         <div
                             onClick={(e) => {
                                 setDefaultCity()

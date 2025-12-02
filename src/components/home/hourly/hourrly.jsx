@@ -62,7 +62,7 @@ const HourlyForcast = props => {
     return (
         <div style={{ zIndex: 97 }} className="
                 flex flex-col justify-start items-start
-                w-full scale-95 md:scale-100 xl:w-1/4 min-h-1/2  h-screen bg-primary rounded-xl shadow 
+                w-full scale-95 md:scale-100 xl:w-1/4 min-h-1/2 max-h-900  h-screen bg-primary rounded-xl shadow 
                 p-3
                 "
         >

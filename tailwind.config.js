@@ -44,7 +44,10 @@ module.exports = {
       maxWidth: {
         custome: "1440px"
       },minHeight:{
-        200:"200px"
+        200:"200px",
+        700:"700px"
+      },maxHeight:{
+        900:"900px"
       },
       fontSize:{
         30:"30px",
