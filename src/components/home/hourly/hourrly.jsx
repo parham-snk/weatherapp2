@@ -73,7 +73,7 @@ const HourlyForcast = props => {
                 }} className="relative w-auto h-auto bg-gray-700 p-2 rounded-md bg-opacity-60">
                     <div className="flex flex-row justify-center align-middle items-center cursor-pointer">
                         <p clas>{day}</p>
-                        <img className="mx-2" src={`${process.env.PUBLIC_URL}/assets/icon-dropdown.svg`} alt="" />
+                        <img className="mx-2" src="/assets/icon-dropdown.svg" alt="" />
                     </div>
                     {
                         showDayList &&

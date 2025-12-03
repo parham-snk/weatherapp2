@@ -70,8 +70,8 @@ const HomePage = props => {
                         <div className="flex flex-col xl:flex-row justify-center align-middle items-center w-full h-full" id="d">
                             <div className="flex flex-col w-full h-full">
                                 <div className="relative w-full">
-                                    <img src={`${process.env.PUBLIC_URL}/assets/bg-today-small.svg`} className="block md:hidden w-full" alt="" />
-                                    <img src={`${process.env.PUBLIC_URL}/assets/bg-today-large.svg`} className="hidden md:block w-full" alt="" />
+                                    <img src="/assets/bg-today-small.svg" className="block md:hidden w-full" alt="" />
+                                    <img src="/assets/bg-today-large.svg" className="hidden md:block w-full" alt="" />
                                     <div className="absolute w-full h-full flex flex-col justify-center items-center md:flex-row md:justify-between md:align-middle top-0 left-0">
                                         <div className="flex flex-col justify-center itemce md:items-start md:pl-10 md:w-2/4 pt-10 md:pt-0">
                                             <p className="text-shadow-md text-2xl md:text-4xl font-bold text-nowrap">{info && `${info.city}, ${info.country}`}</p>
