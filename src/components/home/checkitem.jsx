@@ -15,7 +15,7 @@ const CheckItem = props => {
         <div className="flex justify-center align-middle items-center">
             {
                 check &&
-                <img src="/assets/icon-checkmark.svg" alt="" />
+                <img src={`${process.env.PUBLIC_URL}/assets/icon-checkmark.svg`} alt="" />
             }
         </div>
     </div>
