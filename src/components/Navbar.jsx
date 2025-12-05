@@ -11,7 +11,7 @@ const Navbar = props => {
                 <NavLink to={"/w"}>
                     <img src="/assets/logo.svg" />
                 </NavLink>
-                <div className="flex flex-row justify-center items-center text-center text-white bg-primary rounded px-2 bg-opacity-60">
+                <div className="flex flex-row justify-center items-center text-center text-white bg-primary rounded px-2 bg-opacity-60 me-32">
                     <div className={`md:mx-2 rounded py-1 px-2 cursor-pointer text-md ${GPS ? "text-white bg-white bg-opacity-40" : "text-white scale-75"}`} onClick={() => {
                         window.scrollTo(0,0)
                         setLoading(true)

@@ -8,10 +8,11 @@ import Daily from "../components/home/daily/daily"
 import checkweather_code from "../components/checkWeather"
 import { useLocation, useNavigate } from "react-router"
 import Loading from "../components/loading"
+import Suncycle from "../components/home/sunrise&sunset"
 
 const HomePage = props => {
 
-    const { fahrenheit, setFahrenheit, windSpeedKM, setWindSpeedKM,loading } = useContext(UnitContext)
+    const { fahrenheit, setFahrenheit, windSpeedKM, setWindSpeedKM, loading } = useContext(UnitContext)
 
 
     const [info, setInfo] = useState()
@@ -25,7 +26,8 @@ const HomePage = props => {
     useEffect(() => {
         if (info) {
             setHourly(false)
-            setCurrent(info.current)
+            let [sunrise, sunset] = [info.daily.sunrise[0], info.daily.sunset[0]]
+            setCurrent({ ...info.current, sunrise, sunset });
             setDaily(info.daily)
             setHourly(info.hourly)
 
@@ -40,7 +42,9 @@ const HomePage = props => {
 
     }, [info])
 
-
+    useEffect(() => {
+        console.log(current)
+    }, [current])
 
 
     const date = new Date();
@@ -125,6 +129,7 @@ const HomePage = props => {
                             </div>
                             <Daily data={info.daily} />
                         </div>
+                        {/* <Suncycle sunrise={current?.sunrise} sunset={current?.sunset}/> */}
                     </div>
 
 
@@ -138,7 +143,7 @@ const HomePage = props => {
             }
             {
                 loading &&
-                <Loading/>
+                <Loading />
             }
 
 
