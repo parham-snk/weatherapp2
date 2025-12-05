@@ -111,7 +111,7 @@ const Searchbar = props => {
 
                     if (location)
                         setinput(name)
-                    if (name != getDefLcocation().city) {
+                    if (name != getDefLcocation()?.city) {
                         setcities([])
                         setshowlist(false)
                         setCoordinates({ latitude: item.latitude, longitude: item.longitude })
