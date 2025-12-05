@@ -9,7 +9,7 @@ import { ContextProvider } from './context/context';
 function App() {
   return (
     <div style={{ height: "100%", }} className="min-h-screen relative w-full z-1  bg-gradient-to-b from-bgfrom to-bgto flex flex-col align-middle items-center overflow-x-hidden">
-      <BrowserRouter>
+      <BrowserRouter basename='/weatherapp2'>
         <ContextProvider>
           <Navbar />
           <div className="flex justify-center align-top items-center pt-32 z-0 w-full md:full md:max-w-custome" style={{ zIndex: 0 }}>
