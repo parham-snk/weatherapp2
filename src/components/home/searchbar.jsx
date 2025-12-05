@@ -144,7 +144,7 @@ const Searchbar = props => {
             <div className="flex flex-col md:flex-row justify-center align-middle w-full my-16">
                 <div className="relative flex flex-row justify-start align-middle bg-primary rounded-xl w-full">
                     <label htmlFor="search" className="flex justify-center align-middle cursor-pointer">
-                        <img className="mx-4 w-5" src="/assets/icon-search.svg" alt="" />
+                        <img className="mx-4 w-5" src="/weatherapp2/assets/icon-search.svg" alt="" />
                     </label>
                     <input id="search" value={input} type="text" onBlur={() => {
                         // setshowlist(false)

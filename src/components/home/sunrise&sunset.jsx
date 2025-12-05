@@ -112,8 +112,8 @@ const Suncycle = ({ sunrise, sunset }) => {
             <path id="passed" fill="none" rx={10} ry={10} strokeWidth="6" stroke="#68A4F1" d="M10,180 C 150,100 150,100 290,180" />
             <rect id="Srect" fill="#02012B" width={25} height={25} rx={10} ry={10} />
             <rect id="Mrect" fill="#02012B" width={25} height={25} rx={10} ry={10} />
-            <image filter="url(#imgShadow)"  className=" transition-all" id="moon" width={20} href="/assets/moon-svgrepo-com.svg" />
-            <image filter="url(#imgShadow)" className=" transition-all " id="sun" width={25} href="/assets/icon-sunny.png" />
+            <image filter="url(#imgShadow)"  className=" transition-all" id="moon" width={20} href="/weatherapp2/assets/moon-svgrepo-com.svg" />
+            <image filter="url(#imgShadow)" className=" transition-all " id="sun" width={25} href="/weatherapp2/assets/icon-sunny.png" />
         </svg>
         <div id="tooltip" role="tooltip" className="transition-all w-fit bg-black bg-opacity-50 backdrop-blur-sm rounded mb-20 p-2 text-sm opacity-0">time</div>
         <div id="tooltip2" role="tooltip" className="transition-all w-fit bg-black bg-opacity-50 backdrop-blur-sm rounded mb-20 p-2 text-sm opacity-0">time</div>

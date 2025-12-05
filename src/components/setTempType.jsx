@@ -13,9 +13,9 @@ const TempType = props => {
             <div onClick={() => {
                 setShowOptions(!showOPtions)
             }} className="flex flex-row cursor-pointer ">
-                <img width={15} src="/assets/gear.svg" />
+                <img width={15} src="/weatherapp2/assets/gear.svg" />
                 <p className="mx-5">units</p>
-                <img width={15} src="/assets/icon-dropdown.svg" alt="" />
+                <img width={15} src="/weatherapp2/assets/icon-dropdown.svg" alt="" />
             </div>
             {
                 showOPtions &&
